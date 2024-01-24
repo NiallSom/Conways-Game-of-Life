@@ -38,7 +38,9 @@ class CONTROLLER:
     def showAll(self):
         for x in range(0, cols):
             for y in range(0, rows):
-                if self.map[x][y] == 1:
+                pygame.draw.line(screen, (100, 100, 100), (0, y * CELL_SIZE), (WIDTH, y * CELL_SIZE))
+                pygame.draw.line(screen, (100, 100, 100), (x * CELL_SIZE, 0), (x * CELL_SIZE, HEIGHT))
+                if self.map[x][y]:
                     pygame.draw.rect(screen, (0, 0, 0), (x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
 
     def nextGeneration(self):
