@@ -15,8 +15,7 @@ class CONTROLLER:
         self.map = []
 
     def createMap(self):
-        for x in range(0, WIDTH, CELL_SIZE):
-            self.map.append([])
+        self.map = [[0 for x in range(rows)] for y in range(cols)]
         self.genMapCells()
 
     def genMapCells(self):
@@ -45,7 +44,7 @@ class CONTROLLER:
 
     def nextGeneration(self):
         # generate next generation
-        nextGenMap = [[0 for _ in range(rows)] for _ in range(cols)]
+        nextGenMap = [[0 for x in range(rows)] for y in range(cols)]
         for x in range(0, cols):
             for y in range(0, rows):
                 # get the initial state of cell
@@ -77,12 +76,15 @@ while 1:
     clock.tick(60)
     controller.showAll()
     pygame.display.flip()
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_RETURN]:
+        controller.nextGeneration()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             quit()
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RETURN:
-                controller.nextGeneration()
+        #if event.type == pygame.KEYDOWN:
+            #if event.key == pygame.K_RETURN:
+                #controller.nextGeneration()
         if event.type == pygame.MOUSEBUTTONDOWN:
             controller.selectCell(pygame.mouse.get_pos())
